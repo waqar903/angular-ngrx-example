@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class CourseService {
+  base_url = 'http://localhost:3000/course/'
 
   http: HttpClient;
 
@@ -15,18 +16,18 @@ export class CourseService {
   }
 
   getAllCourses(): Observable<Course[]> {
-    return this.http.get<Course[]>('/api/courses');
+    return this.http.get<Course[]>(this.base_url);
   }
 
   createCourse(course: Course): Observable<Course> {
-    return this.http.post<Course>('/api/courses', course);
+    return this.http.post<Course>(this.base_url, course);
   }
 
   deleteCourse(courseId: string): Observable<any> {
-    return this.http.delete('/api/courses/' + courseId);
+    return this.http.delete(this.base_url + courseId);
   }
 
   updateCourse(courseId: string | number, changes: Partial<Course>): Observable<any> {
-    return this.http.put('/api/courses/' + courseId, changes);
+    return this.http.put(this.base_url + courseId, changes);
   }
 }
